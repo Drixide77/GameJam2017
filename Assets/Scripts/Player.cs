@@ -37,6 +37,8 @@ public class Player : MonoBehaviour
 	private float fireCurrentCooldown;
 	public float maxRateOfFire;
 
+	//public Animations anim;
+
     void Start()
     {
         controller = GetComponent<Controller2D>();
@@ -66,6 +68,20 @@ public class Player : MonoBehaviour
             }
         }
 		if (fireCurrentCooldown > 0.0f) fireCurrentCooldown -= Time.deltaTime;
+
+		//Animations
+		/*
+		if (velocity.y > 0.05f || velocity.y < 0.05f) {
+			anim.startJump ();
+		} else anim.stopJump ();
+		*/
+
+		if (velocity.x > 0.05f) {
+			//anim.flipX (false);
+		} else if (velocity.x < 0.05f) {
+			//anim.flipX (true);
+		}
+		print (velocity);
     }
 
     public void SetDirectionalInput(Vector2 input)
