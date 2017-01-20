@@ -118,7 +118,7 @@ public class Player : MonoBehaviour
 
 	public void Fire(){
 		if (fireCurrentCooldown <= 0.0f) {
-			Bullet myBullet = (Bullet)Instantiate (bulletPrefab, transform.position + bulletOffset, Quaternion.identity); //as Gameobject;
+			Bullet myBullet = (Bullet)Instantiate (bulletPrefab, transform.position + bulletOffset*controller.collisions.faceDir, Quaternion.identity); //as Gameobject;
 			myBullet.SetDirection (controller.collisions.faceDir);
 			fireCurrentCooldown = maxRateOfFire;
 		}
