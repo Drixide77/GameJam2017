@@ -30,8 +30,12 @@ public class Player : MonoBehaviour
     Controller2D controller;
 
     Vector2 directionalInput;
-    bool wallSliding;
     int wallDirX;
+
+	public Bullet bulletPrefab;
+	public Vector3 bulletOffset;
+	private float fireCurrentCooldown;
+	public float maxRateOfFire;
 
     void Start()
     {
@@ -40,12 +44,13 @@ public class Player : MonoBehaviour
         gravity = -(2 * maxJumpHeight) / Mathf.Pow(timeToJumpApex, 2);
         maxJumpVelocity = Mathf.Abs(gravity) * timeToJumpApex;
         minJumpVelocity = Mathf.Sqrt(2 * Mathf.Abs(gravity) * minJumpHeight);
+		fireCurrentCooldown = 0.0f;
     }
 
     void Update()
     {
         CalculateVelocity();
-        HandleWallSliding();
+        //HandleWallSliding();
 
         controller.Move(velocity * Time.deltaTime, directionalInput);
 
@@ -60,6 +65,7 @@ public class Player : MonoBehaviour
                 velocity.y = 0;
             }
         }
+		if (fireCurrentCooldown > 0.0f) fireCurrentCooldown -= Time.deltaTime;
     }
 
     public void SetDirectionalInput(Vector2 input)
@@ -69,24 +75,6 @@ public class Player : MonoBehaviour
 
     public void OnJumpInputDown()
     {
-        if (wallSliding)
-        {
-            if (wallDirX == directionalInput.x)
-            {
-                velocity.x = -wallDirX * wallJumpClimb.x;
-                velocity.y = wallJumpClimb.y;
-            }
-            else if (directionalInput.x == 0)
-            {
-                velocity.x = -wallDirX * wallJumpOff.x;
-                velocity.y = wallJumpOff.y;
-            }
-            else
-            {
-                velocity.x = -wallDirX * wallLeap.x;
-                velocity.y = wallLeap.y;
-            }
-        }
         if (controller.collisions.below)
         {
             if (controller.collisions.slidingDownMaxSlope)
@@ -112,43 +100,14 @@ public class Player : MonoBehaviour
         }
     }
 
-
-    void HandleWallSliding()
-    {
-        wallDirX = (controller.collisions.left) ? -1 : 1;
-        wallSliding = false;
-        if ((controller.collisions.left || controller.collisions.right) && !controller.collisions.below && velocity.y < 0)
-        {
-            wallSliding = true;
-
-            if (velocity.y < -wallSlideSpeedMax)
-            {
-                velocity.y = -wallSlideSpeedMax;
-            }
-
-            if (timeToWallUnstick > 0)
-            {
-                velocityXSmoothing = 0;
-                velocity.x = 0;
-
-                if (directionalInput.x != wallDirX && directionalInput.x != 0)
-                {
-                    timeToWallUnstick -= Time.deltaTime;
-                }
-                else
-                {
-                    timeToWallUnstick = wallStickTime;
-                }
-            }
-            else
-            {
-                timeToWallUnstick = wallStickTime;
-            }
-
-        }
-
-    }
-
+	public void Fire(){
+		if (fireCurrentCooldown <= 0.0f) {
+			Bullet myBullet = (Bullet)Instantiate (bulletPrefab, transform.position + bulletOffset, Quaternion.identity); //as Gameobject;
+			myBullet.SetDirection (controller.collisions.faceDir);
+			fireCurrentCooldown = maxRateOfFire;
+		}
+	}
+		
     void CalculateVelocity()
     {
         float targetVelocityX = directionalInput.x * moveSpeed;
