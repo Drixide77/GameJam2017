@@ -29,5 +29,16 @@ public class Bullet : MonoBehaviour {
 		bulletDirection = dir;
 	}
 
-
+	void OnCollisionEnter2D(Collision2D c){
+		Debug.Log (" Collision ");
+		if (c.collider.gameObject.layer == LayerMask.NameToLayer ("Ground")) {
+			DestroyObject (gameObject);	
+		}
+		if (c.collider.gameObject.layer == LayerMask.NameToLayer ("Enemies")) {
+			DestroyObject (gameObject);	
+		}
+		if (c.collider.gameObject.layer == LayerMask.NameToLayer ("Hazard")) {
+			DestroyObject (gameObject);	
+		}
+	}
 }
