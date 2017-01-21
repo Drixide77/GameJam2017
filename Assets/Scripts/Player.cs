@@ -53,7 +53,6 @@ public class Player : MonoBehaviour
     {
         CalculateVelocity();
         //HandleWallSliding();
-
         controller.Move(velocity * Time.deltaTime, directionalInput);
 
         if (controller.collisions.above || controller.collisions.below)
@@ -81,7 +80,6 @@ public class Player : MonoBehaviour
 		} else if (velocity.x < 0.05f) {
 			//anim.flipX (true);
 		}
-		print (velocity);
     }
 
     public void SetDirectionalInput(Vector2 input)
@@ -91,21 +89,25 @@ public class Player : MonoBehaviour
 
     public void OnJumpInputDown()
     {
-        if (controller.collisions.below)
-        {
-            if (controller.collisions.slidingDownMaxSlope)
-            {
-                if (directionalInput.x != -Mathf.Sign(controller.collisions.slopeNormal.x))
-                { // not jumping against max slope
-                    velocity.y = maxJumpVelocity * controller.collisions.slopeNormal.y;
-                    velocity.x = maxJumpVelocity * controller.collisions.slopeNormal.x;
-                }
-            }
-            else
-            {
-                velocity.y = maxJumpVelocity;
-            }
-        }
+		if (controller.collisions.below) {
+			if (controller.collisions.slidingDownMaxSlope && Mathf.Sign(gravity) < 0) {
+				if (directionalInput.x != -Mathf.Sign (controller.collisions.slopeNormal.x)) { // not jumping against max slope
+					velocity.y = maxJumpVelocity * controller.collisions.slopeNormal.y;
+					velocity.x = maxJumpVelocity * controller.collisions.slopeNormal.x;
+				}
+			} else {
+				velocity.y = maxJumpVelocity;
+			}
+		} else if (controller.collisions.above && Mathf.Sign(gravity) > 0) {
+			if (controller.collisions.slidingDownMaxSlope) {
+				if (directionalInput.x != -Mathf.Sign (controller.collisions.slopeNormal.x)) { // not jumping against max slope
+					velocity.y = (maxJumpVelocity * controller.collisions.slopeNormal.y);//*-1.0f;
+					velocity.x = maxJumpVelocity * controller.collisions.slopeNormal.x;
+				}
+			} else {
+				velocity.y = -maxJumpVelocity;
+			}	
+		}
     }
 
     public void OnJumpInputUp()
@@ -118,7 +120,7 @@ public class Player : MonoBehaviour
 
 	public void Fire(){
 		if (fireCurrentCooldown <= 0.0f) {
-			Bullet myBullet = (Bullet)Instantiate (bulletPrefab, transform.position + bulletOffset, Quaternion.identity); //as Gameobject;
+			Bullet myBullet = (Bullet)Instantiate (bulletPrefab, transform.position + bulletOffset*controller.collisions.faceDir, Quaternion.identity); //as Gameobject;
 			myBullet.SetDirection (controller.collisions.faceDir);
 			fireCurrentCooldown = maxRateOfFire;
 		}
@@ -130,4 +132,12 @@ public class Player : MonoBehaviour
         velocity.x = Mathf.SmoothDamp(velocity.x, targetVelocityX, ref velocityXSmoothing, (controller.collisions.below) ? accelerationTimeGrounded : accelerationTimeAirborne);
         velocity.y += gravity * Time.deltaTime;
     }
+
+	public void getDestroyed(){
+		print ("Player got destroyed");
+	}
+
+	public void InvertGravity(){
+		gravity = gravity * -1.0f;
+	}
 }
