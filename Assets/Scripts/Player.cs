@@ -92,17 +92,14 @@ public class Player : MonoBehaviour
 		if (!jumping) {
 			if (velocity.x > 0.5f || velocity.x < -0.5f) {
 				if (!running) {
-					print ("running!");
 					anim.CrossFade ("running", 0.0f);
 					running = true;
 				}
 			} else {
 				running = false;
 				if (aiming) {
-					print ("aim");
 					anim.CrossFade ("aim", 0.0f);
 				} else {
-					print ("idle");
 					anim.CrossFade ("idle", 0.0f);
 				}
 			}
@@ -139,10 +136,8 @@ public class Player : MonoBehaviour
 			}
 
 			if (aiming) {
-				print ("jumpaim");
 				anim.CrossFade ("jumpaim", 0.0f);
 			} else {
-				print ("jump");
 				anim.CrossFade ("jump", 0.0f);
 			}
 		}
@@ -157,7 +152,6 @@ public class Player : MonoBehaviour
     {
 		jumping = true;
 		running = false;
-		print ("jump");
 		audiosource.PlayOneShot (jump);
 		anim.CrossFade ("jump", 0.0f);
 		if (controller.collisions.below) {
@@ -211,7 +205,6 @@ public class Player : MonoBehaviour
     }
 
 	public void getDestroyed(){
-		print ("Player got destroyed");
 		audiosource.PlayOneShot (tele);
 		Instantiate (teleport, transform.position, Quaternion.identity);
 		//Respawn!

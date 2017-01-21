@@ -21,8 +21,7 @@ public class Checkpoint : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		if (!activated) {
-			if (Mathf.Abs (transform.position.x) <= Mathf.Abs (player.transform.position.x)) {
-				print ("Checkpoint!");
+			if (transform.position.x <= player.transform.position.x) {
 				playerScript.SetRespawn (transform.position + offset);
 				activated = true;
 				sr.sprite = active;

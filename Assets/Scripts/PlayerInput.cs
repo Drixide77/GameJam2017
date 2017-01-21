@@ -29,5 +29,9 @@ public class PlayerInput : MonoBehaviour
 		if (Input.GetButtonDown ("Fire1")) {
 			player.Fire();
 		}
+		//Delete!
+		if (Input.GetButtonDown ("Fire2")) {
+			player.getDestroyed ();
+		}
     }
 }
