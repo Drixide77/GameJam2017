@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: 9e43bc7a9ac51a84c8d950b903b25648
-timeCreated: 1484951140
+guid: 22972838566707b4d8547ef7f422a78f
+timeCreated: 1484952899
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -12,6 +12,10 @@ TextureImporter:
     21300010: sprites_5
     21300012: sprites_6
     21300014: sprites_7
+    21300016: sprites_8
+    21300018: sprites_9
+    21300020: sprites_10
+    21300022: sprites_11
   serializedVersion: 4
   mipmaps:
     mipMapMode: 0
@@ -38,7 +42,7 @@ TextureImporter:
     filterMode: 0
     aniso: -1
     mipBias: -1
-    wrapMode: 1
+    wrapMode: 0
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
@@ -61,7 +65,7 @@ TextureImporter:
   - buildTarget: DefaultTexturePlatform
     maxTextureSize: 2048
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -69,7 +73,7 @@ TextureImporter:
   - buildTarget: Standalone
     maxTextureSize: 2048
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -86,7 +90,7 @@ TextureImporter:
         width: 22
         height: 24
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
@@ -94,12 +98,12 @@ TextureImporter:
       name: sprites_1
       rect:
         serializedVersion: 2
-        x: 30
+        x: 34
         y: 473
-        width: 30
+        width: 22
         height: 24
-      alignment: 9
-      pivot: {x: 0.42403895, y: 0.5}
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
@@ -107,12 +111,12 @@ TextureImporter:
       name: sprites_2
       rect:
         serializedVersion: 2
-        x: 65
-        y: 473
-        width: 32
-        height: 22
-      alignment: 9
-      pivot: {x: 0.4050486, y: 0.53452784}
+        x: 4
+        y: 436
+        width: 25
+        height: 34
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
@@ -120,12 +124,12 @@ TextureImporter:
       name: sprites_3
       rect:
         serializedVersion: 2
-        x: 99
-        y: 473
-        width: 29
-        height: 24
-      alignment: 9
-      pivot: {x: 0.38867792, y: 0.50791293}
+        x: 34
+        y: 436
+        width: 25
+        height: 34
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
@@ -133,12 +137,12 @@ TextureImporter:
       name: sprites_4
       rect:
         serializedVersion: 2
-        x: 128
-        y: 473
-        width: 33
-        height: 23
-      alignment: 9
-      pivot: {x: 0.45396283, y: 0.516514}
+        x: 5
+        y: 407
+        width: 30
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
@@ -146,12 +150,12 @@ TextureImporter:
       name: sprites_5
       rect:
         serializedVersion: 2
-        x: 165
-        y: 473
-        width: 29
+        x: 40
+        y: 407
+        width: 30
         height: 24
-      alignment: 9
-      pivot: {x: 0.36903277, y: 0.5}
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
@@ -159,12 +163,12 @@ TextureImporter:
       name: sprites_6
       rect:
         serializedVersion: 2
-        x: 4
-        y: 436
-        width: 25
-        height: 34
-      alignment: 9
-      pivot: {x: 0.5075959, y: 0.40504906}
+        x: 6
+        y: 368
+        width: 30
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
@@ -172,12 +176,64 @@ TextureImporter:
       name: sprites_7
       rect:
         serializedVersion: 2
-        x: 35
-        y: 436
+        x: 38
+        y: 368
         width: 30
         height: 30
-      alignment: 9
-      pivot: {x: 0.41770896, y: 0.4430298}
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: sprites_8
+      rect:
+        serializedVersion: 2
+        x: 6
+        y: 341
+        width: 32
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: sprites_9
+      rect:
+        serializedVersion: 2
+        x: 40
+        y: 341
+        width: 29
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: sprites_10
+      rect:
+        serializedVersion: 2
+        x: 69
+        y: 341
+        width: 33
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: sprites_11
+      rect:
+        serializedVersion: 2
+        x: 106
+        y: 341
+        width: 29
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
