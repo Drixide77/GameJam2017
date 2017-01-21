@@ -34,6 +34,5 @@ public class Enemy : MonoBehaviour {
 		print("Enemy got destroyed");
 		Instantiate (explosion, transform.position, Quaternion.identity);
 		Destroy(gameObject);
-		print("Destroyed");
 	}
 }

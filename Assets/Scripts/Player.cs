@@ -45,11 +45,20 @@ public class Player : MonoBehaviour
 	bool flipedX = false;
 	float aim2idleCD = 0.5f;
 
+	AudioSource audiosource;
+	public AudioClip laser;
+	public AudioClip tele;
+	public AudioClip jump;
+	public AudioClip wave;
+
+	public GameObject teleport;
+
     void Start()
     {
         controller = GetComponent<Controller2D>();
 		anim = GetComponent<Animator> ();
 		sr = GetComponent<SpriteRenderer> ();
+		audiosource = GetComponent<AudioSource> ();
 
         gravity = -(2 * maxJumpHeight) / Mathf.Pow(timeToJumpApex, 2);
         maxJumpVelocity = Mathf.Abs(gravity) * timeToJumpApex;
@@ -146,6 +155,7 @@ public class Player : MonoBehaviour
 		jumping = true;
 		running = false;
 		print ("jump");
+		audiosource.PlayOneShot (jump);
 		anim.CrossFade ("jump", 0.0f);
 		if (controller.collisions.below) {
 			if (controller.collisions.slidingDownMaxSlope && Mathf.Sign(gravity) < 0) {
@@ -177,8 +187,9 @@ public class Player : MonoBehaviour
     }
 
 	public void Fire(){
-		aiming = true;
 		if (fireCurrentCooldown <= 0.0f) {
+			audiosource.PlayOneShot (laser);
+			aiming = true;
 			Bullet myBullet = (Bullet)Instantiate (bulletPrefab, transform.position + bulletOffset*controller.collisions.faceDir, Quaternion.identity); //as Gameobject;
 			myBullet.SetDirection (controller.collisions.faceDir);
 			fireCurrentCooldown = maxRateOfFire;
@@ -194,9 +205,17 @@ public class Player : MonoBehaviour
 
 	public void getDestroyed(){
 		print ("Player got destroyed");
+		audiosource.PlayOneShot (tele);
+		Instantiate (teleport, transform.position, Quaternion.identity);
+		//Respawn!
+		Destroy(gameObject); //Remove this!
 	}
 
 	public void InvertGravity(){
 		gravity = gravity * -1.0f;
+	}
+
+	public void SoundGravity(){
+		audiosource.PlayOneShot (wave);
 	}
 }

@@ -150,7 +150,7 @@ public class Controller2D : RaycastController
                         continue;
                     }
                 }
-				else if (hit.collider.tag == "Enemy"){
+				else if (hit.collider.tag == "Enemy" || hit.collider.tag == "Hazard"){
 					Player p = GetComponent<Player>();
 					p.getDestroyed ();
 				}
