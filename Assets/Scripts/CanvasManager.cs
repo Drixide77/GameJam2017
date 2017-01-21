@@ -19,6 +19,6 @@ public class CanvasManager : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if (Input.GetAxis("Vertical"))
+		//if (Input.GetAxis("Vertical"))
 	}
 }
