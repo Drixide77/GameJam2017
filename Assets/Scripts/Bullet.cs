@@ -9,6 +9,7 @@ public class Bullet : MonoBehaviour {
 	private BoxCollider2D bulletCollider;
 	private int bulletDirection;
 	private float bulletTimeToLive;
+
 	// Use this for initialization
 	void Start () {
 		bulletCollider = GetComponent<BoxCollider2D>();
@@ -32,12 +33,10 @@ public class Bullet : MonoBehaviour {
 	void OnCollisionEnter2D(Collision2D c){
 		Debug.Log (" Collision ");
 		if (c.collider.gameObject.layer == LayerMask.NameToLayer ("Ground")) {
-			DestroyObject (gameObject);	
-		}
-		if (c.collider.gameObject.layer == LayerMask.NameToLayer ("Enemies")) {
-			DestroyObject (gameObject);	
-		}
-		if (c.collider.gameObject.layer == LayerMask.NameToLayer ("Hazard")) {
+			if (c.collider.tag == "Enemy") {
+				Enemy en = c.collider.gameObject.GetComponent<Enemy> ();
+				en.getDestroyed ();
+			}
 			DestroyObject (gameObject);	
 		}
 	}

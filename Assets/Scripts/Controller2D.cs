@@ -150,7 +150,10 @@ public class Controller2D : RaycastController
                         continue;
                     }
                 }
-
+				else if (hit.collider.tag == "Enemy"){
+					Player p = GetComponent<Player>();
+					p.getDestroyed ();
+				}
                 moveAmount.y = (hit.distance - skinWidth) * directionY;
                 rayLength = hit.distance;
 
