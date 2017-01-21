@@ -53,7 +53,6 @@ public class Player : MonoBehaviour
     {
         CalculateVelocity();
         //HandleWallSliding();
-
         controller.Move(velocity * Time.deltaTime, directionalInput);
 
         if (controller.collisions.above || controller.collisions.below)
@@ -81,7 +80,6 @@ public class Player : MonoBehaviour
 		} else if (velocity.x < 0.05f) {
 			//anim.flipX (true);
 		}
-		print (velocity);
     }
 
     public void SetDirectionalInput(Vector2 input)
@@ -132,6 +130,10 @@ public class Player : MonoBehaviour
     }
 
 	public void getDestroyed(){
-	
+		print ("Player got destroyed");
+	}
+
+	public void InvertGravity(){
+		gravity = gravity * -1.0f;
 	}
 }

@@ -15,6 +15,6 @@ public class Enemy : MonoBehaviour {
 	}
 
 	public void getDestroyed(){
-		
+		print("Enemy got destroyed");
 	}
 }

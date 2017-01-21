@@ -31,7 +31,6 @@ public class Bullet : MonoBehaviour {
 	}
 
 	void OnCollisionEnter2D(Collision2D c){
-		Debug.Log (" Collision ");
 		if (c.collider.gameObject.layer == LayerMask.NameToLayer ("Ground")) {
 			if (c.collider.tag == "Enemy") {
 				Enemy en = c.collider.gameObject.GetComponent<Enemy> ();
