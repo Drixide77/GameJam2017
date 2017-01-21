@@ -37,11 +37,19 @@ public class Player : MonoBehaviour
 	private float fireCurrentCooldown;
 	public float maxRateOfFire;
 
-	//public Animations anim;
+	Animator anim;
+	SpriteRenderer sr;
+	public bool running = false;
+	public bool jumping = false;
+	public bool aiming = false;
+	bool flipedX = false;
+	float aim2idleCD = 0.5f;
 
     void Start()
     {
         controller = GetComponent<Controller2D>();
+		anim = GetComponent<Animator> ();
+		sr = GetComponent<SpriteRenderer> ();
 
         gravity = -(2 * maxJumpHeight) / Mathf.Pow(timeToJumpApex, 2);
         maxJumpVelocity = Mathf.Abs(gravity) * timeToJumpApex;
@@ -68,17 +76,63 @@ public class Player : MonoBehaviour
         }
 		if (fireCurrentCooldown > 0.0f) fireCurrentCooldown -= Time.deltaTime;
 
-		//Animations
-		/*
-		if (velocity.y > 0.05f || velocity.y < 0.05f) {
-			anim.startJump ();
-		} else anim.stopJump ();
-		*/
+		// ------------- Animations ----------------------
+		if (!jumping) {
+			if (velocity.x > 0.5f || velocity.x < -0.5f) {
+				if (!running) {
+					print ("running!");
+					anim.CrossFade ("running", 0.0f);
+					running = true;
+				}
+			} else {
+				running = false;
+				if (aiming) {
+					print ("aim");
+					anim.CrossFade ("aim", 0.0f);
+				} else {
+					print ("idle");
+					anim.CrossFade ("idle", 0.0f);
+				}
+			}
+		}
+
 
 		if (velocity.x > 0.05f) {
-			//anim.flipX (false);
-		} else if (velocity.x < 0.05f) {
-			//anim.flipX (true);
+			sr.flipX = false;
+			flipedX = false;
+		} else if (velocity.x < -0.05f) {
+			sr.flipX = true;
+			flipedX = true;
+		} else
+			sr.flipX = flipedX; 
+
+		if (Mathf.Sign(gravity) > 0.0f) {
+			sr.flipY = true;
+		} else sr.flipY = false;
+
+		if (aiming) {
+			aim2idleCD -= Time.deltaTime;
+			if (aim2idleCD < 0.0f) {
+				aim2idleCD = 0.5f;
+				aiming = false;
+			}
+		}
+
+		if (jumping) {
+			if (controller.collisions.below && Mathf.Sign (gravity) < 0.0f) {
+				jumping = false;
+			}
+			if (controller.collisions.above && Mathf.Sign (gravity) > 0.0f) {
+				jumping = false;
+			}
+
+			if (aiming) {
+				print ("jumpaim");
+				anim.CrossFade ("jumpaim", 0.0f);
+			} else {
+				print ("jump");
+				anim.CrossFade ("jump", 0.0f);
+			}
 		}
     }
 
@@ -89,6 +143,10 @@ public class Player : MonoBehaviour
 
     public void OnJumpInputDown()
     {
+		jumping = true;
+		running = false;
+		print ("jump");
+		anim.CrossFade ("jump", 0.0f);
 		if (controller.collisions.below) {
 			if (controller.collisions.slidingDownMaxSlope && Mathf.Sign(gravity) < 0) {
 				if (directionalInput.x != -Mathf.Sign (controller.collisions.slopeNormal.x)) { // not jumping against max slope
@@ -119,6 +177,7 @@ public class Player : MonoBehaviour
     }
 
 	public void Fire(){
+		aiming = true;
 		if (fireCurrentCooldown <= 0.0f) {
 			Bullet myBullet = (Bullet)Instantiate (bulletPrefab, transform.position + bulletOffset*controller.collisions.faceDir, Quaternion.identity); //as Gameobject;
 			myBullet.SetDirection (controller.collisions.faceDir);
