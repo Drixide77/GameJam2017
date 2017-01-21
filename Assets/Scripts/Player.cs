@@ -89,21 +89,25 @@ public class Player : MonoBehaviour
 
     public void OnJumpInputDown()
     {
-        if (controller.collisions.below)
-        {
-            if (controller.collisions.slidingDownMaxSlope)
-            {
-                if (directionalInput.x != -Mathf.Sign(controller.collisions.slopeNormal.x))
-                { // not jumping against max slope
-                    velocity.y = maxJumpVelocity * controller.collisions.slopeNormal.y;
-                    velocity.x = maxJumpVelocity * controller.collisions.slopeNormal.x;
-                }
-            }
-            else
-            {
-                velocity.y = maxJumpVelocity;
-            }
-        }
+		if (controller.collisions.below) {
+			if (controller.collisions.slidingDownMaxSlope && Mathf.Sign(gravity) < 0) {
+				if (directionalInput.x != -Mathf.Sign (controller.collisions.slopeNormal.x)) { // not jumping against max slope
+					velocity.y = maxJumpVelocity * controller.collisions.slopeNormal.y;
+					velocity.x = maxJumpVelocity * controller.collisions.slopeNormal.x;
+				}
+			} else {
+				velocity.y = maxJumpVelocity;
+			}
+		} else if (controller.collisions.above && Mathf.Sign(gravity) > 0) {
+			if (controller.collisions.slidingDownMaxSlope) {
+				if (directionalInput.x != -Mathf.Sign (controller.collisions.slopeNormal.x)) { // not jumping against max slope
+					velocity.y = (maxJumpVelocity * controller.collisions.slopeNormal.y);//*-1.0f;
+					velocity.x = maxJumpVelocity * controller.collisions.slopeNormal.x;
+				}
+			} else {
+				velocity.y = -maxJumpVelocity;
+			}	
+		}
     }
 
     public void OnJumpInputUp()
