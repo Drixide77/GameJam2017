@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Enemy : MonoBehaviour {
+public class Hazard : MonoBehaviour {
 
 	public Sprite idle0;
 	public Sprite idle1;
@@ -25,9 +25,5 @@ public class Enemy : MonoBehaviour {
 				sr.sprite = idle0;
 			else sr.sprite = idle1;
 		}
-	}
-
-	public void getDestroyed(){
-		print("Enemy got destroyed");
 	}
 }
