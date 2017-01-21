@@ -5,7 +5,21 @@ using UnityEngine.SceneManagement;
 
 public class GoBackMainMenuButtonScript : MonoBehaviour {
 
-	public void OnClick(){
+	AudioSource audiosource;
+	public AudioClip press;
+
+	public void Click(){
+		audiosource.PlayOneShot (press);
 		SceneManager.LoadScene ("MainMenu");
+	}
+
+	void Start(){
+		audiosource = GetComponent<AudioSource> ();
+	}
+
+	void Update(){
+		if (Input.GetButtonDown("Jump")){
+			Click ();
+		}
 	}
 }
