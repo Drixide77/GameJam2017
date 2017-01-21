@@ -10,11 +10,10 @@ public class CanvasManager : MonoBehaviour {
 	public Button exitButton;
 	public Button selectedButton;
 
-	bool firstIsSelected;
+	//bool firstIsSelected;
 	// Use this for initialization
 	void Start () {
 		selectedButton = playButton;
-		firstIsSelected = true;
 	}
 	
 	// Update is called once per frame

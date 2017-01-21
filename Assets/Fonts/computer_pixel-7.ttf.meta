@@ -1,0 +1,21 @@
+fileFormatVersion: 2
+guid: 47bc020e4f2029246a2e3ba01806ac63
+timeCreated: 1485009744
+licenseType: Free
+TrueTypeFontImporter:
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: Computer Pixel-7
+  fontNames:
+  - Computer Pixel-7
+  fallbackFontReferences: []
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
