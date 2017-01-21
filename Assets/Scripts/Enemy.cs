@@ -6,6 +6,9 @@ public class Enemy : MonoBehaviour {
 
 	public Sprite idle0;
 	public Sprite idle1;
+
+	public GameObject explosion;
+
 	float animCD = 0.25f;
 	private SpriteRenderer sr;
 	int frame = 0;
@@ -29,5 +32,8 @@ public class Enemy : MonoBehaviour {
 
 	public void getDestroyed(){
 		print("Enemy got destroyed");
+		Instantiate (explosion, transform.position, Quaternion.identity);
+		Destroy(gameObject);
+		print("Destroyed");
 	}
 }
