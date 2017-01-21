@@ -18,6 +18,11 @@ public class GravManager : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+		if (playerScript.died) {
+			TimeUntilGravWave = 5.0f;
+			TimeUntilSound = 4.2f;
+			playerScript.died = false;
+		}
 		TimeUntilGravWave -= Time.deltaTime;
 		TimeUntilSound -= Time.deltaTime;
 		if (TimeUntilGravWave < 0.0f) {

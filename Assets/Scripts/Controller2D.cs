@@ -75,6 +75,10 @@ public class Controller2D : RaycastController
 
             if (hit)
             {
+				if (hit.collider.tag == "Enemy" || hit.collider.tag == "Hazard"){
+					Player p = GetComponent<Player>();
+					p.getDestroyed ();
+				}
 
                 if (hit.distance == 0)
                 {

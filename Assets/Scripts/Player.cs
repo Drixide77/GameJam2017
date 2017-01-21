@@ -53,6 +53,9 @@ public class Player : MonoBehaviour
 
 	public GameObject teleport;
 
+	Vector3 respawnPoint;
+	[HideInInspector] public bool died = false;
+
     void Start()
     {
         controller = GetComponent<Controller2D>();
@@ -180,17 +183,21 @@ public class Player : MonoBehaviour
 
     public void OnJumpInputUp()
     {
-        if (velocity.y > minJumpVelocity)
+		if (velocity.y > minJumpVelocity*-Mathf.Sign(gravity) && Mathf.Sign(gravity) < 0.0f)
         {
             velocity.y = minJumpVelocity;
-        }
+		} else if (velocity.y < minJumpVelocity*-Mathf.Sign(gravity) && Mathf.Sign(gravity) > 0.0f)
+		{
+			velocity.y = -minJumpVelocity;
+		}
+
     }
 
 	public void Fire(){
 		if (fireCurrentCooldown <= 0.0f) {
 			audiosource.PlayOneShot (laser);
 			aiming = true;
-			Bullet myBullet = (Bullet)Instantiate (bulletPrefab, transform.position + bulletOffset*controller.collisions.faceDir, Quaternion.identity); //as Gameobject;
+			Bullet myBullet = (Bullet)Instantiate (bulletPrefab, transform.position + new Vector3(bulletOffset.x*Mathf.Sign(controller.collisions.faceDir), bulletOffset.y*-(Mathf.Sign(gravity)), bulletOffset.z), Quaternion.identity); //as Gameobject;
 			myBullet.SetDirection (controller.collisions.faceDir);
 			fireCurrentCooldown = maxRateOfFire;
 		}
@@ -208,7 +215,9 @@ public class Player : MonoBehaviour
 		audiosource.PlayOneShot (tele);
 		Instantiate (teleport, transform.position, Quaternion.identity);
 		//Respawn!
-		Destroy(gameObject); //Remove this!
+		transform.position = respawnPoint;
+		died = true;
+		gravity = -(gravity * Mathf.Sign(gravity));
 	}
 
 	public void InvertGravity(){
@@ -217,5 +226,9 @@ public class Player : MonoBehaviour
 
 	public void SoundGravity(){
 		audiosource.PlayOneShot (wave);
+	}
+
+	public void SetRespawn(Vector3 spawnPos) {
+		respawnPoint = spawnPos;
 	}
 }
