@@ -18,7 +18,7 @@ public class ParallaxEffect : MonoBehaviour {
 		camLastPos = camRef.position;
 		parallaxScales = new float[backgrounds.Length];
 		for (int i = 0; i < backgrounds.Length; ++i) {
-			parallaxScales [i] = backgrounds [i].position.z*-1.0f;
+			parallaxScales [i] = backgrounds [i].position.z*-1.0f*0.3f;
 		}
 	}
 	
