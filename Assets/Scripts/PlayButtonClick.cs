@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class PlayButtonClick : MonoBehaviour {
 
@@ -11,14 +10,17 @@ public class PlayButtonClick : MonoBehaviour {
 	private bool PlaySelected;
 	private bool GoneUp;
 	private bool GoneDown;
-
+	public bool playPressed;
 
 	public void Click(){
+		playPressed = true;
 		audiosource.PlayOneShot (press);
-		SceneManager.LoadScene ("scene0");
+
+		//
 	}
 
 	void Start(){
+		playPressed = false;
 		audiosource = GetComponent<AudioSource> ();
 		PlaySelected = true;
 		GoneUp = false;
@@ -40,8 +42,9 @@ public class PlayButtonClick : MonoBehaviour {
 		}
 		
 		if (Input.GetButtonDown("Jump") && PlaySelected){
-			print ("Entered here");
+			//print ("Entered here");
 			Click ();
 		}
+
 	}
 }
